@@ -62,7 +62,7 @@ const UserSchema = new Schema({
     Chats: [
         {
             type: Schema.Types.ObjectId,
-            ref: "Chat"
+            ref: "Chats"
         }
     ],
     Bio: {
