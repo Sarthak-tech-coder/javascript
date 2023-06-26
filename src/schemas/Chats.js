@@ -29,4 +29,4 @@ const chatSchema = new mongoose.Schema({
     adminUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     verified: { type: mongoose.Schema.Types.Boolean, default: false },
 })
-module.exports = mongoose.model('Chat', chatSchema)
+module.exports = mongoose.model('Chats', chatSchema)
