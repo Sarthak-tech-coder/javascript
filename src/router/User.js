@@ -353,8 +353,9 @@ router.put("/userVideo", (req, res) => {
     })
 
 })
-router.delete("/removeChatUser", (req, res) => {
+router.post("/removeChatUser", (req, res) => {
     const { UserId, ChatId } = req.body
+    console.log(UserId, ChatId)
     if (UserId === undefined || ChatId === undefined) return res.status(401)
     ChatSchema.findById(ChatId).then((responce) => {
         if (responce.adminUsers !== undefined) {
@@ -362,15 +363,18 @@ router.delete("/removeChatUser", (req, res) => {
             if (index !== -1) {
                 responce.adminUsers.splice(index, 1)
             }
+            console.log(responce.adminUsers)
         }
         var Index = responce.Users.indexOf(UserId)
-        if (index !== -1) {
+        if (Index !== -1) {
             responce.Users.splice(Index, 1)
             userSchema.findById(UserId).then((result) => {
                 const index = result.Chats.indexOf(ChatId)
                 result.Chats.splice(index, 1)
                 result.save()
                 responce.save()
+                console.log("saving result")
+
                 res.json({ status: '200', message: "success" })
                 pusher.trigger("Chat", "update", {
                     data: {
@@ -383,6 +387,8 @@ router.delete("/removeChatUser", (req, res) => {
                     }
                 })
             })
+        } else {
+            console.log("nothing")
         }
     })
 })
