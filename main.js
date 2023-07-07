@@ -32,8 +32,6 @@ app.use(limiter)
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use("/MFAPI", require('./src/router/MFA.js'))
 app.use("/UserAPI", require("./src/router/User.js"))
-app.use("/youtubeAPI", require("./src/router/Youtube.js"))
-app.use("/nlp", require("./src/router/nlp.js"))
 app.get('/api', (req, res) => {
   res.status(200).send({ message: 'Welcome to backend!' });
 });
