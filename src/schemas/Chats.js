@@ -28,5 +28,9 @@ const chatSchema = new mongoose.Schema({
     adminOnly: { type: mongoose.Schema.Types.Boolean, default: false },
     adminUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     verified: { type: mongoose.Schema.Types.Boolean, default: false },
+    Emily: {
+        type: "boolean",
+        default: false
+    }
 })
 module.exports = mongoose.model('Chats', chatSchema)
